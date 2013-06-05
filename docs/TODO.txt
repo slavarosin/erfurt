@@ -1,0 +1,49 @@
+01.04:
+- Submit button in SignUp form: HAND cursor when the mouse is over. Currently default cursor is used.
+- Google Checkout LOGO has an blue border. Remove it.b
+
+
+
+8 marta:
++ Transactions table
++ Charge money from account (make a negative transaction) when user performs Add Shipment.
++ [per day, per week, per month] dropdown in Estimated Amount question in SignUp form
++ Password change option in Profile
+
+Reg:
++ cell phone - not req (digits 10cifr, -, +)
++ fax - not req
++ street2 - not req
++ poslednie 2 - req
++ zip (5)
+
+Add shipment:
++ company name: req
++ value/type of service/weight - req (LB/KG), value USD
++ street2 - not req
++ email - not needed
+-----
++ cell phone - not needed
++ fax - not needed
+-----
+v My Shipments:
++ Mark as Rec -> Mark as Delievered (ne rabotaet)
++ Archive
++ Most Recent (10 items)
++ vsjo v 1 strochku
++ data 2/02/09
++ partija ubrat
++ ceny!!!
++ Google Checkout ne zakryvaet footer
+----------------------------------------------
+
++ Poisk v arhive (ne rabotaet)
+- Chelovek zalivaet dengi (v sootvetsvii s cenami za pakety).
+	Cherez googlecheckout. Poka bez konkretnyh detalei.
++ Vychetaetsja kogda delaesh add shipment.
+- VOID. Dengi ne idut.
+- Referal. E-mail. 10% ot my money idjot chuvaku.
++ My Profile (ne rabotaet)
+
+SCRIPT:
+- Periodicheski prihodjat CSV: A-Username, B- Password, C - Account. Esli konchilis - prisylaet eshjo. Ispolzuetsja kak repository (1 idjot odnomu zakazu). Esli konchilis` - shljotsja email.

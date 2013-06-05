@@ -1,0 +1,78 @@
+<?php
+require("cred.class");
+class class_vars extends class_cred
+{
+	//Main URL
+	var $PATH_HTTP="localhost/erfurt_1/";
+	var $PATH_INC ="INC/";
+
+	//functional variables
+	var $mail_res;
+	var $passwd;
+
+	//prices array
+
+
+	function get_price($serviceType)
+	{
+		$prices_array = array();
+
+		$prices_array["Envelope (GROUND)"]="n/a";
+		$prices_array["Envelope (2ND DAY)"]="10";
+		$prices_array["Envelope (NEXT DAY)"]="10";
+		$prices_array["Envelope (PRIORITY EXPRESS)"]="20";
+
+		$prices_array["0-2 kg / 0-5 lb package (GROUND)"]="10";
+		$prices_array["0-2 kg / 0-5 lb package (2ND DAY)"]="10";
+		$prices_array["0-2 kg / 0-5 lb package (NEXT DAY)"]="20";
+		$prices_array["0-2 kg / 0-5 lb package (PRIORITY EXPRESS)"]="35";
+
+		$prices_array["2-5 kg / 5-12 lb (GROUND)"]="10";
+		$prices_array["2-5 kg / 5-12 lb (2ND DAY)"]="20";
+		$prices_array["2-5 kg / 5-12 lb (NEXT DAY)"]="35";
+		$prices_array["2-5 kg / 5-12 lb (PRIORITY EXPRESS)"]="45";
+
+		$prices_array["5-10 kg / 12-22 lb (GROUND)"]="10";
+		$prices_array["5-10 kg / 12-22 lb (2ND DAY)"]="40";
+		$prices_array["5-10 kg / 12-22 lb (NEXT DAY)"]="50";
+		$prices_array["5-10 kg / 12-22 lb (PRIORITY EXPRESS)"]="60";
+
+		$prices_array[">10 kg / 22 lb (GROUND)"]="15";
+		$prices_array[">10 kg / 22 lb (2ND DAY)"]="60";
+		$prices_array[">10 kg / 22 lb (NEXT DAY)"]="70";
+		$prices_array[">10 kg / 22 lb (PRIORITY EXPRESS)"]="90";
+
+		return $prices_array[$serviceType];
+
+	}
+
+	function generate_pass($strLength)
+	{
+		$characters = array('2','3','4','5','6','7','8','9','a',
+		'c','e','f','g','h','i','j','k','m','p','q','s','t','u',
+		'v','w','x','y','z' );
+
+		$randomString ="";
+		while(strlen($randomString)<$strLength)
+		{
+			$randomCharIndex = rand(0, count($characters)-1);
+			$randomString.=$characters[$randomCharIndex];
+		}
+
+		return $randomString;
+	}
+
+	function send_credentials($strLogin, $strPassword, $strMail)
+	{
+		$Name = "dummy"; //senders name
+		$email = "dummy@tallink.ee"; //senders e-mail adress
+		$recipient = $strMail; //recipient;
+
+		$mail_body = "Your Login: ".$strLogin." Your Password: ".$strPassword; //mail body
+		$subject = "Subject for reviever"; //subject
+		$header = "From: ". $email ."\r\n"; //optional headerfields
+
+		mail($recipient, $subject, $mail_body, $header);
+	}
+}
+?>

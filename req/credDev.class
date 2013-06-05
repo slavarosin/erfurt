@@ -1,0 +1,11 @@
+<?php
+class class_cred
+{
+	var $sql_login="neadekvat_erfurt";
+ 	var $sql_passwd="erfurt";
+ 	var $sql_database="neadekvat_erfurt";
+ 	var $sql_server="localhost";
+ 	
+ 	var $archive_date = '2009-02-25 00:00:00';
+}
+?>

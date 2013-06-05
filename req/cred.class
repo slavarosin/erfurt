@@ -1,0 +1,11 @@
+<?php
+class class_cred
+{
+	var $sql_login="kassa";
+ 	var $sql_passwd="1234";
+ 	var $sql_database="erfurt";
+ 	var $sql_server="localhost";
+ 	
+ 	var $archive_date = '2009-02-22 00:00:00';
+}
+?>

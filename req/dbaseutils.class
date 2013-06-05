@@ -1,0 +1,482 @@
+<?php
+ 
+ require("vars.class");
+ 
+ class class_dbaseutils extends class_vars
+ {
+ 	var $conn_id;
+ 	var $sql_err;
+ 	var $sql_query;
+ 	var $sql_res;
+ 	
+ 	function sql_connect()
+ 	{
+ 		$this->conn_id = @ mysql_connect($this->sql_server, $this->sql_login, $this->sql_passwd);
+			if(!$this->conn_id) 
+				{
+					$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+				}
+			else
+				{
+					mysql_select_db($this->sql_database, $this->conn_id);
+					$this->sql_err = mysql_errno($this->conn_id) . " " . mysql_error($this->conn_id). "\n";
+				}
+	}
+ 
+ 	function sql_execute($sql)
+ 	{
+ 		$this->sql_res = mysql_query($sql, $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 	}
+ 	
+ 	function get_trans_sums($strEmail)
+ 	{
+  		
+  		$resultid = mysql_query("SELECT id FROM user WHERE username='".$strEmail."'", $this->conn_id);
+ 		
+ 			$rowid = mysql_fetch_array($resultid);
+ 				$result = mysql_query("select * from trans where client_id=".$rowid['id'], $this->conn_id);
+ 				$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 				if($this->sql_err==0)
+ 				{
+ 					while($row = mysql_fetch_array($result))
+ 					{
+						$return[] = $row;
+					}
+				}
+				return $return;
+  	}
+ 	
+ 	
+ 	function get_trans_total($strEmail)
+ 	{
+  		$resultid = mysql_query("SELECT id FROM user WHERE username='".$strEmail."'", $this->conn_id);
+ 		$rowid = mysql_fetch_array($resultid);
+ 		
+  		$result = mysql_query("select sum(sum) from trans where client_id=".$rowid['id'], $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			$row = mysql_fetch_array($result);
+ 			$return = $row;
+		}
+		return $return;
+  	}
+ 	
+ 	function sql_count($strSenderParam)
+ 	{
+ 		$resultminID = mysql_query("select id from shipment where status !=9 order by date desc limit 10", $this->conn_id); 
+ 		
+		
+		while($row = mysql_fetch_array($resultminID))
+ 			{
+				$minID = $row;
+			}
+ 		
+ 		
+ 		$result = mysql_query("select count(id) from shipment where sender_address_id=".$strSenderParam." and (status = 9 or shipment.id<'".$minID['id']."')", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			$row = mysql_fetch_array($result);
+ 			$return = $row;
+		}
+		return $return;
+ 	}
+ 	
+ 	function sql_pagination($offset, $limit)
+ 	{
+ 		$result = mysql_query("select name from carrier limit ". $limit." offset ".$offset, $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return[] = $row;
+			}
+ 			
+		}
+		return $return;
+ 	}
+ 	function get_carrier()
+ 	{
+ 		$result = mysql_query("select * from carrier", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return[] = $row;
+			}
+		}
+		return $return;
+	}
+ 	
+ 	function get_user($email, $password)
+ 	{
+ 		$encodedPass = md5($password);
+ 		
+ 		$result = mysql_query("select username, address_id from user where username='".$email."' and passwd='".$encodedPass."'", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return = $row;
+			}
+		}
+		return $return;
+	}
+ 	
+ 	function get_profile($strEmal)
+	{
+		$result = mysql_query("SELECT * FROM user LEFT JOIN address ON(address.id=user.address_id)WHERE user.username='".$strEmal."'", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return = $row;
+			}
+		}
+		return $return;
+	}
+ 	
+ 	function check_name($strName)
+ 	{
+ 		$result = mysql_query("SELECT name FROM user WHERE name='".$strName."'", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return[] = $row;
+			}
+		}
+		return $return;
+ 	}
+ 	
+ 	function insert_credentials($strCompany,$strContactPerson, $strContactPersonPosition, $strEmail, $strPasswd, $strCarrier, $strExpenses, $strPickupRoute,$strIsInternational, $strAmount, $strRole, $strPhone, $strCell, $strFax, $strCity, $strStreet1, $strStreet2, $strState, $strZip, $referalId)
+ 	{
+ 		$encodedPass = md5($strPasswd);
+ 		
+ 		$result = mysql_query("INSERT INTO address(email, company_name, contact_person_name, contact_person_position, city, street1, street2, state, zip) VALUES('".$strEmail."','".$strCompany."','".$strContactPerson."','".$strContactPersonPosition."','".$strCity."','".$strStreet1."','".$strStreet2."','".$strState."', '".$strZip."')", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+		//echo $this->sql_err;
+ 		
+ 		$statusFlag = trim($this->sql_err);
+ 		if($statusFlag=="0")
+ 		{
+ 			$result = mysql_query("SELECT MAX(id) FROM address", $this->conn_id);
+ 			$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 			//echo $this->sql_err;
+ 			
+ 			$statusFlag = trim($this->sql_err);
+ 			if($statusFlag=="0")
+ 			{
+ 				$row = mysql_fetch_array($result);
+				//echo $this->sql_err;
+		
+				$maxID = $row[0];
+		
+				$insertQuery = "INSERT INTO user(username, passwd, carrier, expenses, pickup_route,internationally, amount, address_id, role, phone, cell_phone, fax, referal_id) 
+									VALUES('".$strEmail."','".$encodedPass."', '".$strCarrier."','".$strExpenses."','".$strPickupRoute."','".$strIsInternational."','".$strAmount."','".$maxID."', 'THEROLE', '".$strPhone."','".$strCell."','".$strFax."','".$referalId."' )";
+				$deleteQuery = "DELETE FROM address WHERE id='".$maxID."'";
+
+				$result=mysql_query($insertQuery, $this->conn_id);
+				$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 				//echo $this->sql_err;
+ 		
+ 				$statusFlag = trim($this->sql_err);
+ 		
+ 				if($statusFlag!="0")
+				{
+					$result = mysql_query($deleteQuery, $this->conn_id);
+					//$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 					//echo $this->sql_err;
+ 				}
+ 			}	
+		}
+	}
+ 	
+ 	function get_referal_id($referalEmail)
+ 	{
+ 			$result = mysql_query("SELECT id FROM user WHERE username='".$referalEmail."'", $this->conn_id);
+ 			$refid = mysql_fetch_array($result);
+ 			
+ 			return $refid;
+ 	}
+ 	
+ 	function update_profile($strEmail, $strAdditionalParam, $strCompany,$strContactPerson, $strContactPersonPosition, 
+ 	$strExpenses, $strPickupRoute, $strInternational ,$strAmount, $strRole, $strPhone, $strCell, $strFax, $strCity, $strStreet1, $strStreet2, $strState, $strZip)
+ 	{
+ 		 mysql_query("UPDATE user SET expenses = '".$strExpenses."'
+									  ,pickup_route = '".$strPickupRoute."'  
+									  ,internationally = '".$strInternational."'
+									  ,amount = '".$strAmount."'
+									  ,role = '".$strRole."'
+									  ,phone = '".$strPhone."'
+									  ,cell_phone = '".$strCell."'
+									  ,fax = '".$strFax."'			
+					 WHERE username='".$strEmail."'", $this->conn_id);
+		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+		
+		$statusFlag = trim($this->sql_err);
+ 		if($statusFlag=="0")
+ 		{
+			mysql_query("UPDATE address SET  email = '".$strEmail."'
+											,company_name = '".$strCompany."'
+ 		 							  		,contact_person_name = '".$strContactPerson."'
+ 		 							  		,contact_person_position = '".$strContactPersonPosition."'
+  									  		,city = '".$strCity."'
+											,street1 = '".$strStreet1."'
+											,street2 = '".$strStreet2."'
+											,state = '".$strState."'
+											,zip = '".$strZip."' 	
+					 WHERE id='".$strAdditionalParam."'", $this->conn_id);
+		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+		}
+ 	}
+ 	
+ 	function update_passwd($strEmail,$strPass)
+ 	{
+ 		$encodedPass = md5($strPass);
+ 		 mysql_query("UPDATE user SET passwd = '".$encodedPass."' WHERE username='".$strEmail."'", $this->conn_id);
+		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 	}
+ 	
+ 	
+ 	function make_transaction($strEmail, $transAmount)
+ 	{
+ 		 		
+ 		$result = mysql_query("SELECT id FROM user WHERE username='".$strEmail."'", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			$row = mysql_fetch_array($result);
+ 			 
+ 			
+ 			 
+ 			 if($row['id']!="")
+ 			 {
+ 				$Amount = 0 - $transAmount; 
+ 				$update_result = mysql_query("INSERT INTO trans(sum, comment, client_id) VALUES(".$Amount.", 'transaction', ".$row['id'].")", $this->conn_id);
+ 				 	$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";	
+ 			 }
+			
+		}
+	}
+ 	
+ 	function charge_account($strEmail, $transAmount)
+ 	{
+ 		$result = mysql_query("SELECT id FROM user WHERE username='".$strEmail."'", $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			$row = mysql_fetch_array($result);
+ 			 if($row['id']!="")
+ 			 {
+ 				$update_result = mysql_query("INSERT INTO trans(sum, comment, client_id) VALUES(".$transAmount.", 'Account charge', ".$row['id'].")", $this->conn_id);
+ 				$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";	
+ 			 }
+			
+		}
+	}
+ 	
+ 	function make_referal_charge($id, $transAmount)
+ 	{
+ 		$update_result = mysql_query("INSERT INTO trans(sum, comment, client_id) VALUES(".$transAmount.", 'Referal  charge', ".$id.")", $this->conn_id);
+ 				 	$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";	
+ 	}
+ 	
+ 	
+ 	function make_shipment($rcvEmail, $rcvCompany, $rcvContactPerson, $rcvContactPersonPosition, $rcvCity, $rcvStreet1, 
+ 	$rcvStreet2, $rcvState, $rcvZip, $serviceType, $orderId, $sndInfoParam, $sndcarrier, $packDescription, $packWeight, $packValue)
+ 	{
+ 		$result = mysql_query("INSERT INTO address(email, company_name, contact_person_name, contact_person_position, city, street1, street2, state, zip) 
+ 		VALUES('".$rcvEmail."','".$rcvCompany."','".$rcvContactPerson."','".$rcvContactPersonPosition."','".$rcvCity."','".$rcvStreet1."','".$rcvStreet2."','".$rcvState."', '".$rcvZip."')", $this->conn_id);
+ 		
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+		//echo $this->sql_err;
+ 		
+ 		$statusFlag = trim($this->sql_err);
+ 		if($statusFlag=="0")
+ 		{
+ 			$result = mysql_query("SELECT MAX(id) FROM address", $this->conn_id);
+ 			$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 			//echo $this->sql_err;
+ 			
+ 			$statusFlag = trim($this->sql_err);
+ 			if($statusFlag=="0")
+ 			{
+ 				$row = mysql_fetch_array($result);
+				//echo $this->sql_err;
+		
+				$maxID = $row[0];
+								
+				$insertQuery = "INSERT INTO shipment (service_type, order_id, sender_address_id, receiver_address_id, carrier, description, weight, value )
+				 VALUES ('".$serviceType."','".$orderId."','".$sndInfoParam."','".$maxID."','".$sndcarrier."','".$packDescription."','".$packWeight."','".$packValue."')";
+				$deleteQuery = "DELETE FROM address WHERE id='".$maxID."'";
+
+				$result=mysql_query($insertQuery, $this->conn_id);
+				$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 				//echo $this->sql_err;
+ 		
+ 				$statusFlag = trim($this->sql_err);
+ 		
+ 				if($statusFlag!="0")
+				{
+					$result = mysql_query($deleteQuery, $this->conn_id);
+					//$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 					//echo $this->sql_err;
+ 				}
+			}
+ 		 }
+ 	 }
+ 	
+ 	function archive_shipment($shid)
+ 	{
+ 		$result = mysql_query("UPDATE shipment SET status = 9 where id = ".$shid, $this->conn_id);
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 	}
+ 	
+ 	
+ 	
+ 	function get_shipment($strSenderParam)
+ 	{
+ 		$result = mysql_query("SELECT 
+								shipment.id as sh_id,
+								shipment.service_type ,
+								shipment.order_id,
+								shipment.sender_address_id ,
+								shipment.receiver_address_id ,
+								shipment.carrier ,
+								shipment.description  ,
+								shipment.weight ,
+								shipment.value  ,
+								DATE_FORMAT(shipment.date, '%m %d %y') as date ,
+								shipment.status ,
+								address.email,
+								address.company_name,
+								address.contact_person_name,
+								address.contact_person_position,
+								address.city,
+								address.street1 ,
+								address.street2,
+								address.state,
+								address.zip
+							 FROM shipment LEFT JOIN address ON(address.id = shipment.receiver_address_id)WHERE sender_address_id='".$strSenderParam."' and status = 0 order by shipment.date desc limit 10", $this->conn_id);
+ 
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return[] = $row;
+			}
+		}
+		return $return;
+ 	}
+
+	function get_archive_shipment($strSenderParam, $limit, $offset)
+ 	{
+ 		$resultminID = mysql_query("select id from shipment where status !=9 order by date desc limit 10", $this->conn_id); 
+ 		
+		
+		while($row = mysql_fetch_array($resultminID))
+ 			{
+				$minID = $row;
+			}
+ 		 		
+ 		$result = mysql_query("SELECT 
+								shipment.id as sh_id,
+								shipment.service_type ,
+								shipment.order_id,
+								shipment.sender_address_id ,
+								shipment.receiver_address_id ,
+								shipment.carrier ,
+								shipment.description  ,
+								shipment.weight ,
+								shipment.value  ,
+								DATE_FORMAT(shipment.date, '%m %d %y') as date ,
+								shipment.status ,
+								address.email,
+								address.company_name,
+								address.contact_person_name,
+								address.contact_person_position,
+								address.city,
+								address.street1 ,
+								address.street2,
+								address.state,
+								address.zip
+							 FROM shipment LEFT JOIN address ON(address.id = shipment.receiver_address_id)WHERE sender_address_id='".$strSenderParam."' and (status = 9 or shipment.id<'".$minID['id']."') limit ".$limit." offset ".$offset, $this->conn_id);
+ 
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return[] = $row;
+			}
+		}
+		return $return;
+ 	}
+ 	
+	function get_archive_entry_by_id($strSenderParam,$strOrderId, $strAlowdRowAmount)
+ 	{
+ 		$resultminID = mysql_query("select id from shipment where status !=9 order by date desc limit 10", $this->conn_id); 
+ 		
+		
+		while($row = mysql_fetch_array($resultminID))
+ 			{
+				$minID = $row;
+			}
+ 		 		
+ 		$result = mysql_query("SELECT 
+								shipment.id as sh_id,
+								shipment.service_type ,
+								shipment.order_id,
+								shipment.sender_address_id ,
+								shipment.receiver_address_id ,
+								shipment.carrier ,
+								shipment.description  ,
+								shipment.weight ,
+								shipment.value  ,
+								DATE_FORMAT(shipment.date, '%m %d %y') as date ,
+								shipment.status ,
+								address.email,
+								address.company_name,
+								address.contact_person_name,
+								address.contact_person_position,
+								address.city,
+								address.street1 ,
+								address.street2,
+								address.state,
+								address.zip
+							 FROM shipment LEFT JOIN address ON(address.id = shipment.receiver_address_id)WHERE sender_address_id='".$strSenderParam."' and (status = 9 or shipment.id<'".$minID['id']."') and (shipment.order_id LIKE '%".$strOrderId."%' or address.city LIKE '%".$strOrderId."%' or address.street1 LIKE '%".$strOrderId."%' or address.street2 LIKE '%".$strOrderId."%' or address.company_name LIKE '%".$strOrderId."%') order by date limit ".$strAlowdRowAmount, $this->conn_id);
+ 
+ 		$this->sql_err = mysql_errno() . " " . mysql_error() . "\n";
+ 		if($this->sql_err==0)
+ 		{
+ 			while($row = mysql_fetch_array($result))
+ 			{
+				$return[] = $row;
+			}
+		}
+		return $return;
+ 	}
+
+ 	
+ 	function sql_close()
+	{
+		mysql_close($this->conn_id);
+		$this->sql_err="CL";
+	}
+ 	
+ 	
+ 
+ 
+ }
+
+
+?>

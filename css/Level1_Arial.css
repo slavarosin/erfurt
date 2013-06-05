@@ -1,0 +1,391 @@
+.Header {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0A6EAC;
+}
+
+.yellow {
+	color: #FF0;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	text-align: left;
+}
+
+.white {
+	color: #FFF;
+}
+
+.gchkout {
+	width: 180px;
+}
+
+.dummySpan{
+ height: 150px;
+}
+.HeaderWhite {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.shipmetsTable_Header {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #000;
+	padding: 5px;
+}
+
+.pricesTable_Header {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	color: #000;
+	padding: 5px;
+}
+.pricesTable_Content {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 9px;
+	font-weight:normal;
+	text-align:right;
+	color: #000;
+	padding: 5px;
+}
+.pricesTable_ContentWhite {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 9px;
+	font-weight:normal;
+	text-align:right;
+	color: #fff;
+	padding: 5px;
+}
+
+.shipmetsTableSentToarchiveButton {
+	width:90px;
+	height: 10px
+	color: #000;
+	font-size:9px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+}
+.shipmetsTable {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+	color: #000;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+}
+
+.register {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #FFF;
+	text-align: right;
+}
+
+.register_left {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	color: #FFF;
+	text-align:left;
+}
+
+.mainText {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+}
+
+.faq {
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.labelHeader {
+	height: 55px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0A6EAC;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.mainText {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+}
+
+.smallText {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000;
+}
+
+.loginMessage {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	text-align: center;
+}
+
+.smallTextCopyright {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #8F663F;
+}
+
+.mainTextWhite {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: bolder;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.mainTextBlue {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: bolder;
+	color: #00F;
+	text-decoration: none;
+}
+
+.registrationLabel {
+	height: 20px;
+	width: 200px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.registrationContent {
+	height: 20px;
+	width: 300px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.amountContent {
+	height: 20px;
+	width: 95px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.amountDropDown {
+	height: 20px;
+	width: 95px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.profileDetailsLabel {
+	height: 18px;
+	width: 150px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.profileDetailsContent {
+	height: 20px;
+	width: 350px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.imageButton {
+	background-color: transparent;
+	border: none;
+}
+
+.additionalInfo {
+	height: 25px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000;
+}
+
+.validatorShape {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	text-align: center;
+	color: #000;
+}
+
+a.cabinet:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: underline;
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 220px;
+}
+
+a.cabinet:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: underline;
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 220px;
+}
+
+a.cabinet:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #0B69B0;
+	text-decoration: none;
+	padding-right: 0px;
+	padding-left: 0px;
+	background-color: #FF3;
+	width: 220px;
+}
+
+a.cabinet:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #0B69B0;
+	text-decoration: none;
+	padding-right: 0px;
+	padding-left: 0px;
+	background-color: #FF3;
+	width: 220px;
+}
+
+.tableMain {
+	background-image: url(../img/bg_bottom.gif);
+	background-repeat: repeat-x;
+	background-position: 20% 99%;
+}
+
+.tableHeaderCity {
+	background-image: url(../img/bg_city.jpg);
+	background-position: 75% 100%;
+}
+
+.tableHeaderCity_Trucks {
+	background-image: url(../img/bg_trucks.png);
+	background-repeat: no-repeat;
+	background-position: 70% 0%;
+}
+
+td.tdHeaderPrices {
+	background-image: url(../img/bg_prices02.jpg);
+	background-position: 100% 100%;
+}
+
+}
+.tableHeadFaqOuter {
+	background-image: url(../img/bg_faq_c_under.jpg);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+
+.tableHeadFaqInner {
+	background-image: url(../img/bg_faq_c.jpg);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+
+}
+.tableHeadContactOuter {
+	background-image: url(../img/bg_contacts_back.jpg);
+	background-repeat: repeat-x;
+	background-position: right bottom;
+}
+
+td.tdHeadContactInner {
+	background-image: url(../img/bg_contacts_lap.jpg);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+
+.headPricesOuter {
+	background-image: url(../img/bg_prices02.jpg);
+	background-position: 100% 100%;
+}
+
+.headContactOuter {
+	background-image: url(../img/bg_contacts_back.jpg);
+	background-repeat: repeat-x;
+	background-position: right bottom;
+}
+
+.headContactInner {
+	background-image: url(../img/bg_contacts_lap.jpg);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+
+}
+.tableFaqOuter {
+	background-image: url(../img/bg_faq_c_under.jpg);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+
+.tableFaqInner {
+	background-image: url(../img/bg_faq_c.jpg);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+
+td.tdAbout {
+	background-image: url(../img/bg_pack.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+td.tdContact {
+	background-image: url(../img/bg_contacts_iphone.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+td.tdPrices {
+	background-image: url(../img/bg_prices_sale.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+td.tdFaq {
+	background-image: url(../img/bg_thumb.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+td.tdLoginAndCabinetShadow {
+	background-image: url(../img/bg_shadow.png);
+	background-repeat: no-repeat;
+	background-position: 1 5;
+}
+
+td.tdLoginRegisterShape {
+	background-image: url(../img/bg_register.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+td.tdCabinetSignedShape {
+	background-image: url(../img/bg_cabinet_signed_02.png);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+}
+.stateSelect {
+	font-family: Courier New, Courier;
+}

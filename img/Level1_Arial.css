@@ -1,0 +1,129 @@
+.Header {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0A6EAC;
+}
+
+.mainText {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+}
+
+.smallText {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000;
+}
+
+.smallTextCopyright {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #8F663F;
+}
+
+.mainTextWhite {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #FFF;
+}
+
+.inputSingleRow {
+	width: 350px;
+}
+
+.inputAuthorisationRow {
+	width: 150px;
+}
+
+.registerPanel {
+	width: 350px;
+}
+
+.registrationDetailsLabel {
+	height: 20px;
+	width: 150px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.registrationDetailsContent {
+	height: 18px;
+	width: 350px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.profileDetailsLabel {
+	height: 18px;
+	width: 150px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.profileDetailsContent {
+	height: 20px;
+	width: 350px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+}
+
+.additionalInfo {
+	height: 25px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000;
+}
+
+.validatorShape {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	text-align: center;
+	color: #000;
+}
+
+a.cabinet:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: underline;
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 220px;
+}
+
+a.cabinet:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: underline;
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 220px;
+}
+
+a.cabinet:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #0B69B0;
+	text-decoration: none;
+	padding-right: 0px;
+	padding-left: 0px;
+	background-color: #FF3;
+	width: 220px;
+}
+
+a.cabinet:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #0B69B0;
+	text-decoration: none;
+	padding-right: 0px;
+	padding-left: 0px;
+	background-color: #FF3;
+	width: 220px;
+}
