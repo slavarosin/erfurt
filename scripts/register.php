@@ -25,7 +25,6 @@ $expensesPart = $_POST['expenses'];
 $expenses_time_span = $_POST['expences_time_span'];
 $expenses = $expensesPart.":".$expenses_time_span;
 
-
 $buff = $_POST['pickup_route'];
 if($buff=="yes")
 $pickup_route = '1';
@@ -57,9 +56,7 @@ if($err_buff!="0")
 }
 else
 {
-	//$fff="sierra29@hot.ee";
 	$referalid = $var->get_referal_id(trim($ref_email));
-	
 	
 	$var->insert_credentials($company_name, $contact_person_name, $contact_person_position, trim($email), $pass, $carrier, $expenses, $pickup_route,$international,
 	$amount,'ROLE', $phone, $cell_phone, $fax, $city, $street1, $street2, $state, $zip, $referalid['id']);
@@ -80,11 +77,8 @@ else
 		$_SESSION["passwd"] = $pass;
 		$_SESSION["referal"] = $referalid['id'];
 		
-
 		header("location: ../?pg=regdetails");
 	}
 }
 $var->sql_close();
-
-
 ?>
