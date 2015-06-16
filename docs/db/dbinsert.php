@@ -1,11 +1,7 @@
 <?php
 
-Insert_Credentials('Romannsd','sdfsdf', 'Tallinn', 'Sole', 'Paasiku', 'EE', 'Harjumaa', '10314', 'sierra29@hot.ee', 'DHL', '12', '0', '123', 'USER');
-
-
 function Insert_Credentials($strName,$strPassword, $strCity, $strStreet1, $strStreet2,$strCountry, $strState, $strZip, $strEmail, $strCarrier, $strExpenses, $strPickroute, $strAmount, $strPhone )
  	{
-
 		$conn_id = @ mysql_connect("localhost", "erfurt", "erfurt");
 			if(!$conn_id)
 				{
@@ -19,9 +15,6 @@ function Insert_Credentials($strName,$strPassword, $strCity, $strStreet1, $strSt
 					$sgl_err = mysql_errno($conn_id) . " " . mysql_error($conn_id). "\n";
 					echo "SELECT DB: ".$sgl_err."<br>";
 				}
-
-
-
 
 		$result = mysql_query("INSERT INTO address(city, street1, street2, country, state, zip) VALUES('".$strCity."','".$strStreet1."','".$strStreet2."','".$strCountry."','".$strState."','".$strZip."')", $conn_id);
  		$sql_err = mysql_errno() . " " . mysql_error() . "\n";
@@ -54,8 +47,6 @@ function Insert_Credentials($strName,$strPassword, $strCity, $strStreet1, $strSt
  				if($statusFlag!="0")
 				{
 					$result = mysql_query($deleteQuery);
-					//$sql_err = mysql_errno() . " " . mysql_error() . "\n";
- 					//echo $sql_err;
  				}
  			}
 		}
