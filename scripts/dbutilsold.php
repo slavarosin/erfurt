@@ -1,10 +1,4 @@
 <?php
-//Insert_Credentials('Romannss', 'Tallinn', 'Sole', 'Paasiku', 'Estonia', 'Harjumaa', '10314', 'sierra29@hot.ee', 'DHL', '12', '0', '123', '6504943');
-//Check_Credentials('Romanzz', 'PASSWD');
-//Get_Profile('Roman');
-
-
-
 
 function Insert_Credentials($strName,$strPassword, $strCity, $strStreet1, $strStreet2,$strCountry, $strState, $strZip, $strEmail, $strCarrier, $strExpenses, $strPickroute, $strAmount, $strPhone )
 {
@@ -15,7 +9,6 @@ function Insert_Credentials($strName,$strPassword, $strCity, $strStreet1, $strSt
 	{
      	$variable1 = mysqli_connect_error();
 		return 5;
-		//exit();
 	}
 	else
 	{
@@ -51,14 +44,12 @@ function Insert_Credentials($strName,$strPassword, $strCity, $strStreet1, $strSt
 
 function Check_Credentials($strName, $strPasswd)
 {
-	
 	$buff_passwd = md5($strPasswd);
 	$link = @mysqli_connect("localhost","root", "123", "mydb");
 	if (!$link) 
 	{
      	$variable1 = mysqli_connect_error();
 		return 5;
-		//exit();
 	}
 	else
 	{
@@ -77,7 +68,6 @@ function Check_Credentials($strName, $strPasswd)
 
 function Get_Profile($strName)
 {
-	
 	$mysqli = new mysqli("localhost","root", "123");
 	$mysqli->select_db("mydb");
 	
@@ -99,8 +89,7 @@ function Get_Carrier()
 	if (!$link) 
 	{
      	$variable1 = mysqli_connect_error();
-		echo "<option value='".$variable1."'>".$variable1."</option>";	
-		//exit();
+		echo "<option value='".$variable1."'>".$variable1."</option>";
 	}
 	else 
 	{
